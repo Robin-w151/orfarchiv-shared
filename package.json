@@ -1,0 +1,37 @@
+{
+  "name": "orfarchiv-shared",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "lint": "prettier --check . && eslint . && tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "20.5.3",
+    "@commitlint/config-conventional": "20.5.3",
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.13.3",
+    "eslint": "10.10.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.6",
+    "globals": "17.12.0",
+    "husky": "9.1.7",
+    "lint-staged": "16.4.0",
+    "mongodb": "7.6.0",
+    "prettier": "3.9.6",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.69.0",
+    "vitest": "4.1.11"
+  },
+  "overrides": {
+    "bson": "7.2.0"
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "packageManager": "npm@11.11.0"
+}

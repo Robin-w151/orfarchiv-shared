@@ -1,0 +1,45 @@
+import js from '@eslint/js';
+import { defineConfig } from 'eslint/config';
+import prettier from 'eslint-plugin-prettier/recommended';
+import globals from 'globals';
+import ts from 'typescript-eslint';
+
+export default defineConfig([
+  js.configs.recommended,
+  ...ts.configs.recommended,
+  prettier,
+  {
+    rules: {
+      'prettier/prettier': 'error',
+      'no-unused-vars': 'off',
+    },
+  },
+  {
+    files: ['**/*.ts'],
+    languageOptions: {
+      ecmaVersion: 2024,
+      sourceType: 'module',
+      globals: {
+        ...globals.node,
+        ...globals.es2024,
+      },
+      parserOptions: {
+        parser: ts.parser,
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
+    },
+  },
+]);
