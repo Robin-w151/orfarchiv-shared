@@ -12,8 +12,13 @@ Consumed as a git submodule of source, not as an npm package:
 | `scraper` | `src/shared/common/`     |
 | `ui`      | `src/lib/shared/common/` |
 
-The files compile inside each consumer, so imports such as `mongodb` resolve against the consumer's own dependencies.
-Keep this repo free of runtime dependencies and Effect imports.
+The files compile inside each consumer, so imports such as `mongodb` or `effect` resolve against the consumer's own dependencies.
+Keep this repo free of runtime `dependencies`. Packages that shared code imports are `devDependencies` here, for linting
+and tests, pinned to the versions the consumers use. `effect`, `jsdom` and `@mozilla/readability` are also listed as
+`peerDependencies`.
+
+`storyContent.ts` (ORF article extraction) imports `effect`, `jsdom` and `@mozilla/readability`. It is used by `ui` and
+`scraper` only, so `db` excludes it from type checking.
 
 ## Development
 
