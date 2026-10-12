@@ -3,7 +3,7 @@ import { JSDOM } from 'jsdom';
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { StoryContentError, StoryContentErrorReason, StoryContentService } from './storyContent';
-import { ARTICLE_NOISE_SELECTORS, TEXT_NOISE_SELECTORS } from './storyContentConfig';
+import { ARTICLE_NOISE_SELECTORS, TEXT_NOISE_SELECTORS } from './storyContent.constants';
 
 const fixtures = {
   regional: { file: 'regional-story.html', url: 'https://wien.orf.at/stories/3372176/' },

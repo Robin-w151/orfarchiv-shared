@@ -17,7 +17,7 @@ Keep this repo free of runtime `dependencies`. Packages that shared code imports
 and tests, pinned to the versions the consumers use. `effect`, `jsdom` and `@mozilla/readability` are also listed as
 `peerDependencies`.
 
-`storyContent.ts` (ORF article extraction) imports `effect`, `jsdom` and `@mozilla/readability`. It is used by `ui` and
+`storyContent/` (ORF article extraction) imports `effect`, `jsdom` and `@mozilla/readability`. It is used by `ui` and
 `scraper` only, so `db` excludes it from type checking.
 
 ## Development

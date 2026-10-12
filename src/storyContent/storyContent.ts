@@ -7,7 +7,7 @@ import {
   CHART_SELECTOR,
   TEXT_BLOCK_SELECTOR,
   TEXT_NOISE_SELECTORS,
-} from './storyContentConfig';
+} from './storyContent.constants';
 
 export const StoryContentErrorReason = {
   Empty: 'empty',

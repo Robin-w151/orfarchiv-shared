@@ -1,7 +1,7 @@
 import type { Binary } from 'mongodb';
 import { describe, expect, it } from 'vitest';
 import { quantize } from './embedding';
-import { TITLE_EMBEDDING_DIMENSIONS } from './search';
+import { TITLE_EMBEDDING_DIMENSIONS } from '../search/search.constants';
 
 const VECTOR_HEADER_BYTES = 2;
 
