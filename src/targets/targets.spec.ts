@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { labelOf, parseTargets, redact } from './targets';
+import { labelOf, parseTargets, redact, withContentExclusions } from './targets';
 
 describe('parseTargets', () => {
   it('splits on newlines', () => {
@@ -46,14 +46,43 @@ describe('parseTargets', () => {
 
   it('keeps replica-set URIs containing commas intact', () => {
     expect(parseTargets('mongodb://u:p@a:27017,b:27017,c:27017/?replicaSet=rs0;mongodb://d/')).toEqual([
-      { url: 'mongodb://u:p@a:27017,b:27017,c:27017/?replicaSet=rs0', label: 'a:27017,b:27017,c:27017' },
-      { url: 'mongodb://d/', label: 'd' },
+      { url: 'mongodb://u:p@a:27017,b:27017,c:27017/?replicaSet=rs0', label: 'a:27017,b:27017,c:27017', content: true },
+      { url: 'mongodb://d/', label: 'd', content: true },
     ]);
   });
 
   it('returns nothing for empty input', () => {
     expect(parseTargets('')).toEqual([]);
     expect(parseTargets(' \n ; ')).toEqual([]);
+  });
+});
+
+describe('withContentExclusions', () => {
+  const targets = parseTargets('mongodb://a/;mongodb://u:p@b:27017/;mongodb://c/');
+
+  it('keeps content on every target without exclusions', () => {
+    expect(withContentExclusions(targets, '')).toEqual({ targets, unknownLabels: [] });
+    expect(withContentExclusions(targets, ' \n ; ').targets.map((target) => target.content)).toEqual([
+      true,
+      true,
+      true,
+    ]);
+  });
+
+  it('disables content on excluded labels', () => {
+    const { targets: result, unknownLabels } = withContentExclusions(targets, ' b:27017 ;c');
+    expect(result.map(({ label, content }) => [label, content])).toEqual([
+      ['a', true],
+      ['b:27017', false],
+      ['c', false],
+    ]);
+    expect(unknownLabels).toEqual([]);
+  });
+
+  it('returns excluded labels that match no target', () => {
+    const { targets: result, unknownLabels } = withContentExclusions(targets, 'a;typo.mongodb.net\nb');
+    expect(result.map((target) => target.content)).toEqual([false, true, true]);
+    expect(unknownLabels).toEqual(['typo.mongodb.net', 'b']);
   });
 });
 
