@@ -12,7 +12,7 @@
   },
   "peerDependencies": {
     "@mozilla/readability": "0.5.0",
-    "effect": "4.1.1",
+    "effect": "4.1.2",
     "jsdom": "30.1.3"
   },
   "devDependencies": {
@@ -22,11 +22,11 @@
     "@mozilla/readability": "0.5.0",
     "@types/jsdom": "30.0.0",
     "@types/node": "24.19.2",
-    "effect": "4.1.1",
+    "effect": "4.1.2",
     "eslint": "10.14.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.7",
-    "globals": "17.13.0",
+    "globals": "17.14.0",
     "husky": "9.1.7",
     "jsdom": "30.1.3",
     "lint-staged": "17.6.0",
@@ -34,7 +34,7 @@
     "prettier": "3.9.10",
     "typescript": "6.0.3",
     "typescript-eslint": "8.72.1",
-    "vitest": "5.0.5"
+    "vitest": "5.1.0"
   },
   "overrides": {
     "bson": "7.2.0"
